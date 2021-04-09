@@ -1,5 +1,5 @@
 # Read Me
-
+[![DOI](https://zenodo.org/badge/323755412.svg)](https://zenodo.org/badge/latestdoi/323755412)
 DOI: 10.5281/zenodo.4536522
 
 This depository contains the data and code for the "Developmental Circadian Disruption Alters Placental Signaling in Mice" paper. 
