@@ -11,7 +11,7 @@ Important notes:
 
 # Data and code
 
-STAR genome alignment and gene count code is available in the "STAR_code.txt" file. 
+STAR genome alignment and gene count code is available in the "STARcode.txt" file. 
 
 Figure 1: weight, embryo, and placental outcomes data 
 - The "Dam_weights.xlsx" file and "Data_embryo_placenta.xlsx" file contains the data analyzed and graphed in Figure 1. 
