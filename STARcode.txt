@@ -1,0 +1,28 @@
+#Code for aligning raw fastq files and generating read counts in STAR
+#Using AWS and cyberduck
+#######################################
+
+#first download reference genome FASTA file and annotation GTF file
+#FASTA file:
+#Mus_musculus.GRCm38.dna.primary_assembly.fa from ftp://ftp.ensembl.org/pub/release-101/fasta/mus_musculus/dna/ 
+#GTF file:
+#Mus_musculus.GRCm38.92.gtf from ftp://ftp.ensembl.org/pub/release-101/gtf/mus_musculus/
+
+#building genome index
+
+#unzip files [can find raw files in GEO, GSE169266)
+zcat Mus_musculus.GRCm38.92.gtf.gz > Mus_musculus.GRCm38.92.gtf
+zcat Mus_musculus.GRCm38.dna.primary_assembly.fa.gz > Mus_musculus.GRCm38.dna.primary_assembly.fa
+
+# genome indexing code
+STAR --runMode genomeGenerate --genomeDir ~/your_file_directory_location_here/output/ --genomeFastaFiles Mus_musculus.GRCm38.dna.primary_assembly.fa --sjdbGTFfile Mus_musculus.GRCm38.92.gtf --runThreadN 8
+
+
+
+# repeat this code for each sample or write a loop
+#sample1:
+STAR --genomeDir ~/your_file_directory_location_here/output/ --readFilesCommand zcat --readFilesIn MPA_01_CRRA200011737-1a_H55VYDSXY_L2_1.fq.gz MPA_01_CRRA200011737-1a_H55VYDSXY_L2_2.fq.gz --quantMode TranscriptomeSAM GeneCounts --sjdbGTFfile ~/gtf/Mus_musculus.GRCm38.92.gtf --outSAMtype BAM Unsorted SortedByCoordinate --outFileNamePrefix ~/raw_data/sample1. --runThreadN 8
+#update your S3 bucket with the new output files
+aws s3 sync . s3://your_output_file_directory_location_here/
+
+
